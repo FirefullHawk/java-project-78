@@ -16,7 +16,7 @@ public class StringSchema extends BaseSchema {
     public boolean isValid(Object inputData) {
         boolean minLengthCheck = !lengthCheckActive || inputData.toString().length() >= minLength;
         boolean containsCheck = !containsCheckActive || inputData.toString().contains(containsSubscribing);
-        boolean typeCheck = inputData instanceof String || super.isValid(inputData);
+        boolean typeCheck = inputData instanceof String && !inputData.equals("") || super.isValid(inputData);
         return minLengthCheck && containsCheck && typeCheck;
     }
 

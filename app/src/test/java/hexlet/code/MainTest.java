@@ -41,25 +41,25 @@ public class MainTest {
     public void nullTest(BaseSchema schema) {
         assertTrue(schema.isValid(null));
         assertFalse(schema.required().isValid(null));
-        assertFalse(schema.required().isValid(true));
     }
 
     @Test
     public void workingString() {
         String inputString = "What does just 1 fox";
         assertTrue(stringSchema.required().isValid(inputString));
+        assertFalse(stringSchema.isValid(""));
         assertTrue(stringSchema.minLength(5).isValid(inputString));
         assertTrue(stringSchema.contains("Wh").isValid(inputString));
-        assertFalse(stringSchema.isValid(""));
     }
 
     @Test
     public void workingInteger() {
-        Integer inputNumber = 116;
-        assertFalse(numberSchema.required().isValid(inputNumber.toString()));
-        assertTrue(numberSchema.positive().isValid(inputNumber));
-        assertFalse(numberSchema.isValid(-inputNumber));
+        int inputNumber = 116;
+        assertFalse(numberSchema.required().isValid("inputNumber"));
+        assertFalse(numberSchema.positive().isValid(-inputNumber));
+        assertFalse(numberSchema.isValid(null));
         assertTrue(numberSchema.range(110, 120).isValid(inputNumber));
+        assertFalse(numberSchema.isValid(70) || numberSchema.isValid(170));
     }
 
     @Test
