@@ -76,5 +76,10 @@ public class MainTest {
 
         Map<String, Object> anotherInputMap = Map.of("Cookies", "", "Value", -100);
         assertFalse(mapSchema.isValid(anotherInputMap));
+
+        Map<String, Object> oneMoreInputMap = new HashMap<>();
+        oneMoreInputMap.put("Cookies", "Tuc");
+        oneMoreInputMap.put("Value", null);
+        assertTrue(mapSchema.isValid(oneMoreInputMap));
     }
 }

@@ -18,7 +18,7 @@ public class NumberSchema extends BaseSchema {
         try {
             positiveCheck = !positiveCheckActive || (Integer) inputData > 0;
         } catch (RuntimeException e) {
-            return false;
+            positiveCheck = true;
         }
         boolean typeCheck = inputData instanceof Integer || super.isValid(inputData);
         boolean rangeCheck = !rangeCheckActive || isInRange(inputData, startRange, endRange);
