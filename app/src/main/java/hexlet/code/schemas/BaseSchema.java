@@ -10,6 +10,6 @@ public class BaseSchema {
         return this;
     }
     public boolean isValid(Object inputData) {
-        return !requiredActive && Objects.equals(inputData, null);
+        return !requiredActive && (Objects.equals(inputData, null) || Objects.equals(inputData, ""));
     }
 }
