@@ -14,10 +14,15 @@ public class NumberSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object inputData) {
-        boolean positiveCheck = !positiveCheckActive || (Integer) inputData >= 0;
-        boolean rangeCheck = !rangeCheckActive || isInRange(inputData, startRange, endRange);
+        boolean positiveCheck;
+        try {
+            positiveCheck = !positiveCheckActive || (Integer) inputData >= 0;
+        } catch (RuntimeException e) {
+            return false;
+        }
         boolean typeCheck = inputData instanceof Integer || super.isValid(inputData);
-        return positiveCheck && rangeCheck && typeCheck;
+        boolean rangeCheck = !rangeCheckActive || isInRange(inputData, startRange, endRange);
+        return typeCheck && rangeCheck && positiveCheck;
     }
 
     public NumberSchema positive() {

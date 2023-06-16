@@ -28,7 +28,7 @@ public class MainTest {
         mapSchema = validator.map();
     }
 
-    private static Stream<BaseSchema> enumeration() {
+    private static Stream<? super BaseSchema> enumeration() {
 
         return Stream.of(
                 stringSchema,
