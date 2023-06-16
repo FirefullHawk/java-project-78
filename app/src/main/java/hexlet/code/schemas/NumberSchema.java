@@ -16,7 +16,7 @@ public class NumberSchema extends BaseSchema {
     public boolean isValid(Object inputData) {
         boolean positiveCheck;
         try {
-            positiveCheck = !positiveCheckActive || (Integer) inputData >= 0;
+            positiveCheck = !positiveCheckActive || (Integer) inputData > 0;
         } catch (RuntimeException e) {
             return false;
         }
