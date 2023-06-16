@@ -8,8 +8,7 @@ public class NumberSchema extends BaseSchema {
     @Override
     public boolean isValid(Object inputData) {
         boolean positiveCheck = !positiveCheckActive || (Integer) inputData >= 0;
-        boolean rangeCheck = !rangeCheckActive || (Integer) inputData >= startRange
-                && (Integer) inputData <= endRange;
+        boolean rangeCheck = !rangeCheckActive || isInRange(inputData, startRange, endRange);
         boolean typeCheck = inputData instanceof Integer || super.isValid(inputData);
         return positiveCheck && rangeCheck && typeCheck;
     }
@@ -24,5 +23,9 @@ public class NumberSchema extends BaseSchema {
         startRange = startRangeInput;
         endRange = endRangeInput;
         return this;
+    }
+
+    private boolean isInRange(Object inputData, int startRange, int endRange) {
+        return (Integer) inputData >= startRange && (Integer) inputData <= endRange;
     }
 }
