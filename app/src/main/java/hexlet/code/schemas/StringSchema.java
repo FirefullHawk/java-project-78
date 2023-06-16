@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class StringSchema extends BaseSchema {
+public final class StringSchema extends BaseSchema {
     private boolean lengthCheckActive = false;
     private boolean containsCheckActive = false;
     private String containsSubscribing;

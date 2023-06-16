@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainTest {
+public final class MainTest {
     private static Validator validator;
     private static StringSchema stringSchema;
     private static NumberSchema numberSchema;

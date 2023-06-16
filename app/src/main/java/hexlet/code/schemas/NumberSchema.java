@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class NumberSchema extends BaseSchema {
+public final class NumberSchema extends BaseSchema {
     private boolean positiveCheckActive = false;
     private boolean rangeCheckActive = false;
     private int startRange;
