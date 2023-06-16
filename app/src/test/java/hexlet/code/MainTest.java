@@ -68,7 +68,7 @@ public class MainTest {
         assertFalse(mapSchema.required().isValid(114));
         assertTrue(mapSchema.sizeof(1).isValid(inputMap));
 
-        Map<Object, BaseSchema> schemas = new HashMap<>();
+        Map<String, BaseSchema> schemas = new HashMap<>();
         schemas.put("Cookies", validator.string().required());
         schemas.put("Value", validator.number().positive());
 

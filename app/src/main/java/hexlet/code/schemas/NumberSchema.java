@@ -5,6 +5,13 @@ public class NumberSchema extends BaseSchema {
     private boolean rangeCheckActive = false;
     private int startRange;
     private int endRange;
+
+    @Override
+    public NumberSchema required() {
+        super.required();
+        return this;
+    }
+
     @Override
     public boolean isValid(Object inputData) {
         boolean positiveCheck = !positiveCheckActive || (Integer) inputData >= 0;

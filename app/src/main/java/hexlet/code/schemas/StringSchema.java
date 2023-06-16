@@ -7,6 +7,12 @@ public class StringSchema extends BaseSchema {
     private int minLength;
 
     @Override
+    public StringSchema required() {
+        super.required();
+        return this;
+    }
+
+    @Override
     public boolean isValid(Object inputData) {
         boolean minLengthCheck = !lengthCheckActive || inputData.toString().length() >= minLength;
         boolean containsCheck = !containsCheckActive || inputData.toString().contains(containsSubscribing);
