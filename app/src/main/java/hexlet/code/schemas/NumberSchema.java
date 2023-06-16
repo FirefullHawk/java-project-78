@@ -25,7 +25,7 @@ public class NumberSchema extends BaseSchema {
         return this;
     }
 
-    private boolean isInRange(Object inputData, int startRange, int endRange) {
-        return (Integer) inputData >= startRange && (Integer) inputData <= endRange;
+    private boolean isInRange(Object inputData, int start, int end) {
+        return (Integer) inputData >= start && (Integer) inputData <= end;
     }
 }
