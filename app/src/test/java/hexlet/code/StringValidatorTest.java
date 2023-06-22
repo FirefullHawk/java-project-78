@@ -19,27 +19,27 @@ public final class StringValidatorTest {
     }
 
     @BeforeEach
-    public void inputScheme() {
+    public void inputSchemeTest() {
         stringSchema = validator.string();
     }
     @Test
-    public void nullValid() {
+    public void nullValidTest() {
         assertTrue(stringSchema.isValid(null));
         assertFalse(stringSchema.required().isValid(null));
     }
     @Test
-    public void stringValid() {
+    public void stringValidTest() {
         assertTrue(stringSchema.required().isValid(inputString));
         assertFalse(stringSchema.isValid(""));
     }
 
     @Test
-    public void stringMinLength() {
+    public void stringMinLengthTest() {
         assertTrue(stringSchema.minLength(5).isValid(inputString));
     }
 
     @Test
-    public void stringContains() {
+    public void stringContainsTest() {
         assertTrue(stringSchema.contains("Wh").isValid(inputString));
         assertFalse(stringSchema.contains("Hat").isValid(inputString));
     }

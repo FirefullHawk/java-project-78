@@ -23,28 +23,28 @@ public final class MapValidatorTest {
     }
 
     @BeforeEach
-    public void inputScheme() {
+    public void inputSchemeTest() {
         mapSchema = validator.map();
     }
     @Test
-    public void nullValid() {
+    public void nullValidTest() {
         assertTrue(mapSchema.isValid(null));
         assertFalse(mapSchema.required().isValid(null));
     }
     @Test
-    public void mapValid() {
+    public void mapValidTest() {
         assertFalse(mapSchema.isValid(114));
         assertTrue(mapSchema.required().isValid(inputMap));
     }
 
     @Test
-    public void mapSize() {
-        assertFalse(mapSchema.sizeof(3).isValid(new HashMap<>()));
+    public void mapSizeTest() {
+        assertFalse(mapSchema.sizeof(2).isValid(new HashMap<>()));
         assertTrue(mapSchema.sizeof(2).isValid(inputMap));
     }
 
     @Test
-    public void mapShape() {
+    public void mapShapeTest() {
         Map<String, BaseSchema> schemas = new HashMap<>();
         schemas.put("Cookies", validator.string().required());
         schemas.put("Value", validator.number().positive());

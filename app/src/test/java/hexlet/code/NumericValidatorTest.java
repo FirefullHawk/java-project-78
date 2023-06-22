@@ -19,29 +19,29 @@ public final class NumericValidatorTest {
     }
 
     @BeforeEach
-    public void inputScheme() {
+    public void inputSchemeTest() {
         numberSchema = validator.number();
     }
     @Test
-    public void nullValid() {
+    public void nullValidTest() {
         assertTrue(numberSchema.isValid(null));
         assertFalse(numberSchema.required().isValid(null));
     }
     @Test
-    public void integerValid() {
+    public void integerValidTest() {
         assertFalse(numberSchema.required().isValid("inputNumber"));
         assertFalse(numberSchema.isValid(null));
         assertTrue(numberSchema.isValid(inputNumber));
     }
 
     @Test
-    public void integerPositive() {
+    public void integerPositiveTest() {
         assertTrue(numberSchema.positive().isValid(null));
         assertFalse(numberSchema.positive().isValid(-inputNumber));
     }
 
     @Test
-    public void integerRange() {
+    public void integerRangeTest() {
         assertTrue(numberSchema.range(110, 120).isValid(inputNumber));
         assertFalse(numberSchema.isValid(70) || numberSchema.isValid(170));
     }

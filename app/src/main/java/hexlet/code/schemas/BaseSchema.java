@@ -1,23 +1,39 @@
 package hexlet.code.schemas;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class BaseSchema {
-    private boolean requiredActive = false;
+    private final List<Predicate<Object>> checks = new ArrayList<>();
+    protected final void addCheck(Predicate<Object> validate) {
+        checks.add(validate);
+    }
+
     /**
-     * This function mark the required flag.
+     * This function add the required check.
      * @return scheme-type
      */
     public BaseSchema required() {
-        requiredActive = true;
+        Predicate<Object> required =
+                inputDate -> Objects.nonNull(inputDate) && !Objects.equals(inputDate, "");
+        addCheck(required);
         return this;
     }
+
     /**
      * This function check empty and null input.
      @return valid or not input object
      @param inputData is Object which must be validated
      */
     public boolean isValid(Object inputData) {
-        return !requiredActive && (Objects.equals(inputData, null) || Objects.equals(inputData, ""));
+        Predicate<Object> nullCheck =
+                inputDate -> Objects.isNull(inputData) || checks.size() > 1;
+
+        checks.add(nullCheck);
+
+        return checks.stream()
+                .allMatch(check -> check.test(inputData));
     }
 }

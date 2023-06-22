@@ -1,34 +1,36 @@
 package hexlet.code.schemas;
 
+import java.util.function.Predicate;
+
 public final class StringSchema extends BaseSchema {
-    private boolean lengthCheckActive = false;
-    private boolean containsCheckActive = false;
-    private String containsSubscribing;
-    private int minLength;
 
     @Override
     public StringSchema required() {
         super.required();
+
+        Predicate<Object> typeCheck =
+                inputDate -> inputDate instanceof String;
+        addCheck(typeCheck);
+
         return this;
     }
 
     @Override
     public boolean isValid(Object inputData) {
-        boolean minLengthCheck = !lengthCheckActive || inputData.toString().length() >= minLength;
-        boolean containsCheck = !containsCheckActive || inputData.toString().contains(containsSubscribing);
-        boolean typeCheck = inputData instanceof String && !((String) inputData).isEmpty() || super.isValid(inputData);
-        return minLengthCheck && containsCheck && typeCheck;
+        return super.isValid(inputData);
     }
 
     public StringSchema minLength(int minLengthInput) {
-        lengthCheckActive = true;
-        minLength = minLengthInput;
+        Predicate<Object> minLength =
+                inputData -> inputData.toString().length() >= minLengthInput;
+        addCheck(minLength);
         return this;
     }
 
     public StringSchema contains(String substring) {
-        containsCheckActive = true;
-        containsSubscribing = substring;
+        Predicate<Object> contains =
+                inputData -> inputData.toString().contains(substring);
+        addCheck(contains);
         return this;
     }
 }
