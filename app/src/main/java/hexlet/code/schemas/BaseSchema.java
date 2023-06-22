@@ -28,11 +28,6 @@ public class BaseSchema {
      @param inputData is Object which must be validated
      */
     public boolean isValid(Object inputData) {
-        Predicate<Object> nullCheck =
-                inputDate -> Objects.isNull(inputData) || checks.size() > 1;
-
-        checks.add(nullCheck);
-
         return checks.stream()
                 .allMatch(check -> check.test(inputData));
     }

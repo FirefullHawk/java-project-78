@@ -17,6 +17,7 @@ public final class StringSchema extends BaseSchema {
         Predicate<Object> typeCheck =
                 inputDate -> inputDate instanceof String || Objects.equals(inputDate, null);
         addCheck(typeCheck);
+
         return super.isValid(inputData);
     }
 

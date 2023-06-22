@@ -1,21 +1,21 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public final class NumberSchema extends BaseSchema {
     @Override
     public NumberSchema required() {
-        Predicate<Object> typeCheck =
-                inputDate -> inputDate instanceof Integer;
-
-        addCheck(typeCheck);
-
         super.required();
         return this;
     }
 
     @Override
     public boolean isValid(Object inputData) {
+        Predicate<Object> typeCheck =
+                inputDate -> inputDate instanceof Integer || Objects.equals(inputDate, null);
+
+        addCheck(typeCheck);
         return super.isValid(inputData);
     }
 
