@@ -1,5 +1,6 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public final class StringSchema extends BaseSchema {
@@ -7,16 +8,15 @@ public final class StringSchema extends BaseSchema {
     @Override
     public StringSchema required() {
         super.required();
-
-        Predicate<Object> typeCheck =
-                inputDate -> inputDate instanceof String;
-        addCheck(typeCheck);
-
         return this;
     }
 
     @Override
     public boolean isValid(Object inputData) {
+
+        Predicate<Object> typeCheck =
+                inputDate -> inputDate instanceof String || Objects.equals(inputDate, null);
+        addCheck(typeCheck);
         return super.isValid(inputData);
     }
 
