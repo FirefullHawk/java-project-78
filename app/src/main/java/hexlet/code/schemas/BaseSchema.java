@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class BaseSchema {
-    private final List<Predicate<Object>> checks = new ArrayList<>();
-    protected final void addCheck(Predicate<Object> validate) {
+    private final static List<Predicate<Object>> checks = new ArrayList<>();
+    protected static void addCheck(Predicate<Object> validate) {
         checks.add(validate);
     }
 
@@ -15,9 +15,9 @@ public class BaseSchema {
      * This function add the required check.
      * @return scheme-type
      */
-    public BaseSchema required() {
+    public final BaseSchema required() {
         Predicate<Object> required =
-                inputDate -> Objects.nonNull(inputDate) && !Objects.equals(inputDate, "");
+                input -> Objects.nonNull(input) && !Objects.equals(input, "");
         addCheck(required);
         return this;
     }
@@ -27,7 +27,7 @@ public class BaseSchema {
      @return valid or not input object
      @param inputData is Object which must be validated
      */
-    public boolean isValid(Object inputData) {
+    public final boolean isValid(Object inputData) {
         return checks.stream()
                 .allMatch(check -> check.test(inputData));
     }

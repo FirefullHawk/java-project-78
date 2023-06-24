@@ -2,7 +2,6 @@ package hexlet.code;
 
 import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,32 +12,27 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class MapValidatorTest {
-    private static Validator validator;
+    private static final Validator validator = new Validator();
     private static MapSchema mapSchema;
-    private static Map<String, Object> inputMap;
-    @BeforeAll
-    public static void inputValidate() {
-        validator = new Validator();
-        inputMap = Map.of("Cookies", "Oreo", "Value", 100);
-    }
 
     @BeforeEach
     public void inputSchemeTest() {
         mapSchema = validator.map();
     }
     @Test
-    public void nullValidTest() {
-        assertTrue(mapSchema.isValid(null));
-        assertFalse(mapSchema.required().isValid(null));
-    }
-    @Test
     public void mapValidTest() {
+        Map<String, Object> inputMap = new HashMap<>();
+
         assertFalse(mapSchema.isValid(114));
+        assertTrue(mapSchema.isValid(null));
         assertTrue(mapSchema.required().isValid(inputMap));
+        assertFalse(mapSchema.isValid(null));
     }
 
     @Test
     public void mapSizeTest() {
+        Map<String, Object> inputMap = Map.of("Cookies", "Oreo", "Value", 7);
+
         assertFalse(mapSchema.sizeof(2).isValid(new HashMap<>()));
         assertTrue(mapSchema.sizeof(2).isValid(inputMap));
     }
@@ -48,6 +42,10 @@ public final class MapValidatorTest {
         Map<String, BaseSchema> schemas = new HashMap<>();
         schemas.put("Cookies", validator.string().required());
         schemas.put("Value", validator.number().positive());
+
+        Map<String, Object> inputMap = new HashMap<>();
+        inputMap.put("Cookies", "Oreo");
+        inputMap.put("Value", 7);
 
         assertTrue(mapSchema.shape(schemas).isValid(inputMap));
 
