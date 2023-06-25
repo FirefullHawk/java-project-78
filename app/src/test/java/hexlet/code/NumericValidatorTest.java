@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class NumericValidatorTest {
-    private static final Validator validator = new Validator();
     private static NumberSchema numberSchema;
 
     @BeforeEach
     public void inputSchemeTest() {
+        Validator validator = new Validator();
         numberSchema = validator.number();
     }
     @Test
