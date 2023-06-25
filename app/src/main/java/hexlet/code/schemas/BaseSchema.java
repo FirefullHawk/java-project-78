@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class BaseSchema {
-    private final static List<Predicate<Object>> checks = new ArrayList<>();
-    protected static void addCheck(Predicate<Object> validate) {
+    private final List<Predicate<Object>> checks = new ArrayList<>();
+    protected void addCheck(Predicate<Object> validate) {
         checks.add(validate);
     }
 
