@@ -4,6 +4,12 @@ import java.util.function.Predicate;
 
 public final class StringSchema extends BaseSchema {
 
+    @Override
+    public StringSchema required() {
+        super.required();
+        return this;
+    }
+
     public StringSchema() {
         Predicate<Object> typeCheck =
                 input -> input instanceof String || input == null;

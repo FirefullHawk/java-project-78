@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.function.Predicate;
 
 public final class MapSchema extends BaseSchema {
+
+    @Override
+    public MapSchema required() {
+        super.required();
+        return this;
+    }
+
     public MapSchema() {
         Predicate<Object> typeCheck =
                 inputDate -> inputDate instanceof Map<?, ?> || inputDate == null;

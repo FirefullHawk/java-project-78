@@ -15,7 +15,7 @@ public class BaseSchema {
      * This function add the required check.
      * @return scheme-type
      */
-    public final BaseSchema required() {
+    public BaseSchema required() {
         Predicate<Object> required =
                 input -> Objects.nonNull(input) && !Objects.equals(input, "");
         addCheck(required);

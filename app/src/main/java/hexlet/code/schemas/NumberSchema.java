@@ -4,6 +4,12 @@ import java.util.function.Predicate;
 
 public final class NumberSchema extends BaseSchema {
 
+    @Override
+    public NumberSchema required() {
+        super.required();
+        return this;
+    }
+
     public NumberSchema() {
         Predicate<Object> typeCheck =
                 input -> input == null || input instanceof Integer;
