@@ -1,18 +1,21 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public final class StringSchema extends BaseSchema {
 
     @Override
     public StringSchema required() {
-        super.required();
+        Predicate<Object> required =
+                input -> Objects.nonNull(input) && !input.toString().isEmpty();
+        addCheck(required);
         return this;
     }
 
     public StringSchema() {
         Predicate<Object> typeCheck =
-                input -> input instanceof String || input == null;
+                input -> input == null || input instanceof String;
         addCheck(typeCheck);
     }
 
@@ -25,7 +28,7 @@ public final class StringSchema extends BaseSchema {
 
     public StringSchema contains(String substring) {
         Predicate<Object> contains =
-                input -> input.toString().contains(substring);
+                input -> input == null || input.toString().contains(substring);
         addCheck(contains);
         return this;
     }

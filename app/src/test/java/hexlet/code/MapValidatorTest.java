@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class MapValidatorTest {
-    private static final Validator VALIDATOR = new Validator();
-    private static MapSchema mapSchema;
+    private final Validator validator = new Validator();
+    private MapSchema mapSchema;
 
     @BeforeEach
     public void inputSchemeTest() {
-        mapSchema = VALIDATOR.map();
+        mapSchema = validator.map();
     }
     @Test
     public void mapValidTest() {
@@ -40,8 +40,8 @@ public final class MapValidatorTest {
     @Test
     public void mapShapeTest() {
         Map<String, BaseSchema> schemas = new HashMap<>();
-        schemas.put("Cookies", VALIDATOR.string().required());
-        schemas.put("Value", VALIDATOR.number().positive());
+        schemas.put("Cookies", validator.string().required());
+        schemas.put("Value", validator.number().positive());
 
         Map<String, Object> inputMap = new HashMap<>();
         inputMap.put("Cookies", "Oreo");
@@ -55,6 +55,7 @@ public final class MapValidatorTest {
         Map<String, Object> oneMoreInputMap = new HashMap<>();
         oneMoreInputMap.put("Cookies", "Tuc");
         oneMoreInputMap.put("Value", null);
+        oneMoreInputMap.put("anotherValue", -114);
         assertTrue(mapSchema.isValid(oneMoreInputMap));
     }
 }

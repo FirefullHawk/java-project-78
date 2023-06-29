@@ -17,7 +17,7 @@ public class BaseSchema {
      */
     public BaseSchema required() {
         Predicate<Object> required =
-                input -> Objects.nonNull(input) && !Objects.equals(input, "");
+                Objects::nonNull;
         addCheck(required);
         return this;
     }

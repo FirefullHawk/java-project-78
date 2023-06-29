@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class NumericValidatorTest {
-    private static NumberSchema numberSchema;
+    private NumberSchema numberSchema;
 
     @BeforeEach
     public void inputSchemeTest() {
@@ -33,6 +33,7 @@ public final class NumericValidatorTest {
     @Test
     public void integerRangeTest() {
         assertTrue(numberSchema.range(110, 120).isValid(111));
-        assertFalse(numberSchema.isValid(70) || numberSchema.isValid(170));
+        assertFalse(numberSchema.isValid(70));
+        assertFalse(numberSchema.isValid(170));
     }
 }

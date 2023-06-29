@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class StringValidatorTest {
-    private static StringSchema stringSchema;
+    private StringSchema stringSchema;
 
     @BeforeEach
     public void inputSchemeTest() {
@@ -17,8 +17,10 @@ public final class StringValidatorTest {
     }
     @Test
     public void stringValidTest() {
-        assertTrue(stringSchema.isValid(null) && stringSchema.isValid(""));
-        assertFalse(stringSchema.required().isValid(null) && stringSchema.isValid(""));
+        assertTrue(stringSchema.isValid(null));
+        assertTrue(stringSchema.isValid(""));
+        assertFalse(stringSchema.required().isValid(null));
+        assertFalse(stringSchema.isValid(""));
         assertTrue(stringSchema.required().isValid("What does just one fox"));
     }
 

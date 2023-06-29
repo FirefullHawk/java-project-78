@@ -1,7 +1,6 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
-import java.util.HashMap;
 import java.util.function.Predicate;
 
 public final class MapSchema extends BaseSchema {
@@ -14,25 +13,24 @@ public final class MapSchema extends BaseSchema {
 
     public MapSchema() {
         Predicate<Object> typeCheck =
-                inputDate -> inputDate instanceof Map<?, ?> || inputDate == null;
+                input -> input == null || input instanceof Map<?, ?>;
         addCheck(typeCheck);
     }
 
     public MapSchema sizeof(int inputSize) {
         Predicate<Object> sizeof =
-                inputDate -> ((Map<?, ?>) inputDate).size() >= inputSize;
+                input -> input == null || ((Map<?, ?>) input).size() >= inputSize;
         addCheck(sizeof);
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> inputSchema) {
-        HashMap<?, BaseSchema> scheme = new HashMap<>(inputSchema);
 
         Predicate<Object> shape =
-                input -> input == null || ((Map<?, ?>) input).keySet()
+                input -> input == null || inputSchema.keySet()
                         .stream().allMatch(key -> {
-                            Object valueInputMap = ((Map<?, ?>) input).get(key);
-                            return scheme.get(key).isValid(valueInputMap);
+                            Object valueInput = ((Map<?, ?>) input).get(key);
+                            return inputSchema.get(key).isValid(valueInput);
                         });
         addCheck(shape);
         return this;
