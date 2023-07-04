@@ -18,10 +18,12 @@ public final class NumericValidatorTest {
     @Test
     public void integerValidTest() {
         assertTrue(numberSchema.isValid(null));
+        assertTrue(numberSchema.isValid(111));
+
         assertFalse(numberSchema.required().isValid(null));
         assertFalse(numberSchema.isValid("inputNumber"));
         assertFalse(numberSchema.isValid(null));
-        assertTrue(numberSchema.isValid(111));
+        assertFalse(numberSchema.isValid(4.55));
     }
 
     @Test
@@ -33,6 +35,9 @@ public final class NumericValidatorTest {
     @Test
     public void integerRangeTest() {
         assertTrue(numberSchema.range(110, 120).isValid(111));
+        assertTrue(numberSchema.range(110, 120).isValid(110));
+        assertTrue(numberSchema.range(110, 120).isValid(120));
+
         assertFalse(numberSchema.isValid(70));
         assertFalse(numberSchema.isValid(170));
     }
